@@ -415,7 +415,7 @@ public enum Platform {
    * @return the most likely platform based on given operating system name
    */
   public static Platform extractFromSysProperty(String osName) {
-    return extractFromSysProperty(osName, System.getProperty("os.version"));
+    return extractFromSysProperty(osName, System.getProperty("os.version",""));
   }
 
   /**
@@ -429,6 +429,7 @@ public enum Platform {
    */
   public static Platform extractFromSysProperty(String osName, String osVersion) {
     osName = osName.toLowerCase(Locale.ENGLISH);
+    osVersion = osVersion == null ? "" : osVersion;
     // os.name for android is linux
     if ("dalvik".equalsIgnoreCase(System.getProperty("java.vm.name"))) {
       return Platform.ANDROID;
